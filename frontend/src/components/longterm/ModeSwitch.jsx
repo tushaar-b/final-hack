@@ -1,5 +1,6 @@
 import React from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
+import { motion } from 'framer-motion';
 
 export default function ModeSwitch() {
   const location = useLocation();
@@ -8,7 +9,7 @@ export default function ModeSwitch() {
   const isLongTerm = location.pathname.startsWith('/longterm');
 
   return (
-    <div className="flex bg-[var(--bg-card)] rounded-lg p-1 mb-6 border border-[var(--text-caption)]/20 mx-3">
+    <div className="flex relative bg-[#0a0a0a]/50 rounded-xl p-1 mb-6 border border-[var(--color-highlight)]/10 mx-3 shadow-inner">
       <button
         onClick={() => {
           if (isLongTerm) {
@@ -19,10 +20,17 @@ export default function ModeSwitch() {
             }
           }
         }}
-        className={`flex-1 py-1.5 text-xs font-medium rounded-md transition-colors ${!isLongTerm ? 'bg-[var(--text-caption)]/10 text-[var(--text-primary)] shadow-sm' : 'text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:bg-[var(--text-caption)]/5'}`}
+        className={`relative flex-1 py-2 text-xs font-medium rounded-lg transition-colors z-10 ${!isLongTerm ? 'text-[var(--color-highlight)]' : 'text-[var(--text-secondary)] hover:text-[var(--text-primary)]'}`}
       >
-        Short-Term
-        <span className="block text-[10px] font-normal opacity-70">5-Day</span>
+        {!isLongTerm && (
+          <motion.div
+            layoutId="mode-pill"
+            className="absolute inset-0 bg-gradient-to-br from-[var(--color-highlight)]/20 to-[var(--color-highlight)]/5 border border-[var(--color-highlight)]/30 rounded-lg shadow-lg"
+            transition={{ type: 'spring', stiffness: 300, damping: 25 }}
+          />
+        )}
+        <span className="relative z-10 font-display text-sm tracking-wide">Short-Term</span>
+        <span className="block relative z-10 text-[10px] font-data opacity-70 mt-0.5">5-Day</span>
       </button>
       <button
         onClick={() => {
@@ -34,10 +42,17 @@ export default function ModeSwitch() {
             }
           }
         }}
-        className={`flex-1 py-1.5 text-xs font-medium rounded-md transition-colors ${isLongTerm ? 'bg-[var(--text-caption)]/10 text-[var(--text-primary)] shadow-sm' : 'text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:bg-[var(--text-caption)]/5'}`}
+        className={`relative flex-1 py-2 text-xs font-medium rounded-lg transition-colors z-10 ${isLongTerm ? 'text-emerald-400' : 'text-[var(--text-secondary)] hover:text-[var(--text-primary)]'}`}
       >
-        Long-Term
-        <span className="block text-[10px] font-normal opacity-70">60-Day</span>
+        {isLongTerm && (
+          <motion.div
+            layoutId="mode-pill"
+            className="absolute inset-0 bg-gradient-to-br from-[var(--color-positive)]/20 to-[var(--color-positive)]/5 border border-[var(--color-positive)]/30 rounded-lg shadow-lg"
+            transition={{ type: 'spring', stiffness: 300, damping: 25 }}
+          />
+        )}
+        <span className="relative z-10 font-display text-sm tracking-wide">Long-Term</span>
+        <span className="block relative z-10 text-[10px] font-data opacity-70 mt-0.5">60-Day</span>
       </button>
     </div>
   );

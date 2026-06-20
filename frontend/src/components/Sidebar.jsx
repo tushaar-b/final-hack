@@ -7,6 +7,7 @@ import {
 import { useAuthStore } from '../store/authStore';
 
 import ModeSwitch from './longterm/ModeSwitch';
+import CursorTrackerMascot from './CursorTrackerMascot';
 
 const getNavItems = (isLongTerm) => [
   { to: isLongTerm ? '/longterm' : '/dashboard', icon: LayoutDashboard, label: 'Dashboard' },
@@ -47,6 +48,13 @@ export default function Sidebar() {
             <span className="font-display text-xl text-[var(--text-primary)]">Aarthi AI</span>
           </div>
         </div>
+      </div>
+
+      {/* Mascot Centerpiece */}
+      <div className="py-6 flex justify-center border-b border-[var(--text-caption)]/10 relative overflow-hidden">
+        {/* Subtle glow behind mascot */}
+        <div className="absolute inset-0 bg-gradient-to-b from-[var(--color-highlight)]/5 to-transparent blur-xl pointer-events-none" />
+        <CursorTrackerMascot className="w-36 h-36" />
       </div>
 
       {/* Nav */}

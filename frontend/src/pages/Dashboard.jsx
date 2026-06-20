@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Search, Filter, TrendingUp, TrendingDown, Clock, RefreshCw, ChevronDown } from 'lucide-react';
+import { motion } from 'framer-motion';
 import { API_URL } from '../lib/supabase';
 import ForecastCard from '../components/ForecastCard';
 import MarketBar from '../components/MarketBar';
@@ -42,6 +43,15 @@ export default function Dashboard() {
   const [sectorFilter, setSectorFilter] = useState('All Sectors');
   const [minConviction, setMinConviction] = useState(0);
   const [search, setSearch] = useState('');
+
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    show: { opacity: 1, transition: { staggerChildren: 0.05 } }
+  };
+  const itemVariants = {
+    hidden: { opacity: 0, y: 20 },
+    show: { opacity: 1, y: 0, transition: { type: "spring", stiffness: 300, damping: 24 } }
+  };
 
   async function loadDashboard(isRefresh = false) {
     if (isRefresh) setRefreshing(true);
@@ -194,21 +204,27 @@ export default function Dashboard() {
 
             {/* Cards grid */}
             {loading ? (
-              <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
+              <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
                 {Array.from({ length: 6 }).map((_, i) => <LoadingSkeleton key={i} />)}
               </div>
             ) : filtered.length === 0 ? (
               <div className="glass-card p-12 text-center">
-                <Filter className="w-8 h-8 text-slate-600 mx-auto mb-3" />
-                <p className="text-slate-400 font-medium">No signals match your filters</p>
-                <p className="text-sm text-slate-600 mt-1">Try adjusting the filters above</p>
+                <Filter className="w-8 h-8 text-[var(--text-caption)] mx-auto mb-3" />
+                <p className="text-[var(--text-secondary)] font-medium">No signals match your filters</p>
               </div>
             ) : (
-              <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
+              <motion.div 
+                variants={containerVariants}
+                initial="hidden"
+                animate="show"
+                className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6"
+              >
                 {filtered.map((f, i) => (
-                  <ForecastCard key={f.id || f.symbol} forecast={f} index={i} />
+                  <motion.div key={f.id || f.symbol} variants={itemVariants}>
+                    <ForecastCard forecast={f} index={i} />
+                  </motion.div>
                 ))}
-              </div>
+              </motion.div>
             )}
 
             {/* Disclaimer */}

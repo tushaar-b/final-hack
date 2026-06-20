@@ -104,12 +104,12 @@ export default function ForecastCard({ forecast, index = 0 }) {
       {returnPct && (
         <div className="mb-4">
           <span className="font-label block mb-1.5">5-Day Return Forecast</span>
-          <div className="flex items-baseline space-x-2">
+          <div className="flex flex-wrap items-baseline gap-2">
             <span className={`font-data text-xl ${parseFloat(returnPct) >= 0 ? 'text-[var(--color-positive)]' : 'text-[var(--color-negative)]'}`}>
               {parseFloat(returnPct) >= 0 ? '+' : ''}{returnPct}%
             </span>
             {bandLow && bandHigh && (
-              <span className="font-data text-xs text-[var(--text-secondary)]">
+              <span className="font-data text-xs text-[var(--text-secondary)] whitespace-nowrap">
                 [{parseFloat(bandLow) >= 0 ? '+' : ''}{bandLow}% to {parseFloat(bandHigh) >= 0 ? '+' : ''}{bandHigh}%]
               </span>
             )}
@@ -119,14 +119,14 @@ export default function ForecastCard({ forecast, index = 0 }) {
 
       {/* TP / SL */}
       {(stance === 'BUY' || stance === 'SELL') && f.target_price && f.stop_loss && (
-        <div className="flex justify-between mb-4">
-          <div className="flex items-center space-x-1">
-            <span className="font-label">Target:</span>
-            <span className="font-data text-sm text-[var(--text-primary)]">₹{f.target_price}</span>
+        <div className="flex flex-wrap justify-between gap-2 mb-4">
+          <div className="flex items-center space-x-1 min-w-0">
+            <span className="font-label whitespace-nowrap">Target:</span>
+            <span className="font-data text-sm text-[var(--text-primary)] truncate">₹{f.target_price}</span>
           </div>
-          <div className="flex items-center space-x-1">
-            <span className="font-label">Stop:</span>
-            <span className="font-data text-sm text-[var(--text-primary)]">₹{f.stop_loss}</span>
+          <div className="flex items-center space-x-1 min-w-0">
+            <span className="font-label whitespace-nowrap">Stop:</span>
+            <span className="font-data text-sm text-[var(--text-primary)] truncate">₹{f.stop_loss}</span>
           </div>
         </div>
       )}

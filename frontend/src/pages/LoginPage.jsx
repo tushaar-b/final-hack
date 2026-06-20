@@ -3,6 +3,7 @@ import { useNavigate, Link } from 'react-router-dom';
 import { TrendingUp, Mail, Lock, Eye, EyeOff, AlertCircle } from 'lucide-react';
 import { useAuthStore } from '../store/authStore';
 import Disclaimer from '../components/Disclaimer';
+import CursorTrackerMascot from '../components/CursorTrackerMascot';
 
 export default function LoginPage() {
   const [email, setEmail] = useState('');
@@ -31,22 +32,23 @@ export default function LoginPage() {
     <div className="bg-mesh min-h-screen flex flex-col items-center justify-center p-4">
       {/* Background glow */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-96 h-96 bg-blue-500/5 rounded-full blur-3xl" />
-        <div className="absolute bottom-1/4 left-1/3 w-64 h-64 bg-violet-500/5 rounded-full blur-3xl" />
+        <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-96 h-96 bg-[var(--color-highlight)]/5 rounded-full blur-3xl" />
+        <div className="absolute bottom-1/4 left-1/3 w-64 h-64 bg-[var(--color-positive)]/5 rounded-full blur-3xl" />
       </div>
 
       <div className="w-full max-w-sm relative">
         {/* Logo */}
-        <div className="text-center mb-8">
-          <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-blue-500 to-emerald-500 flex items-center justify-center mx-auto mb-3">
-            <TrendingUp className="w-6 h-6 text-white" />
+        <div className="text-center mb-8 flex flex-col items-center">
+          <div className="w-40 h-40 mb-2 relative">
+            <div className="absolute inset-0 bg-gradient-to-b from-[var(--color-highlight)]/10 to-transparent blur-xl pointer-events-none" />
+            <CursorTrackerMascot className="w-full h-full" />
           </div>
-          <h1 className="text-2xl font-bold text-white">Aarthi AI</h1>
-          <p className="text-slate-400 text-sm mt-1">Sign in to your account</p>
+          <h1 className="text-4xl font-display text-white tracking-wide">Aarthi AI</h1>
+          <p className="text-[var(--color-highlight)] text-sm mt-1 uppercase tracking-widest font-label">Premium Heritage</p>
         </div>
 
         {/* Card */}
-        <div className="glass-card p-6">
+        <div className="flat-card p-6 border border-[var(--color-highlight)]/10">
           <form onSubmit={handleSubmit} className="space-y-4">
             {/* Error */}
             {error && (

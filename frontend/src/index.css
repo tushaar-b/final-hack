@@ -1,20 +1,21 @@
-@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400&family=IBM+Plex+Mono:wght@400;500;600&family=Inter:wght@400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Outfit:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap');
 @import "tailwindcss";
 
 @theme {
-  --bg-page: #1c1815;
-  --bg-card: #221d18;
-  --text-primary: #f3ece2;
-  --text-secondary: #a89682;
-  --text-caption: #84745f;
-  --color-negative: #d97757;
-  --color-positive: #d9a857;
-  --color-buy: #7ba05b;
-  --color-sell: #c2563f;
+  --bg-page: #080808;
+  --bg-card: rgba(18, 18, 18, 0.75);
+  --text-primary: #F4F4F5;
+  --text-secondary: #A1A1AA;
+  --text-caption: #71717A;
+  --color-negative: #8A1538;
+  --color-positive: #0F5132;
+  --color-buy: #146c43;
+  --color-sell: #b02a37;
+  --color-highlight: #D4AF37;
 
-  --font-display: "Cormorant Garamond", serif;
-  --font-data: "IBM Plex Mono", monospace;
-  --font-label: "Inter", system-ui, sans-serif;
+  --font-display: "Playfair Display", serif;
+  --font-data: "JetBrains Mono", monospace;
+  --font-label: "Outfit", system-ui, sans-serif;
 }
 
 *, *::before, *::after {
@@ -49,24 +50,27 @@ body {
   background: #475569;
 }
 
-/* Removed glass-card entirely, replacing with flat cards */
+/* Luxury Frosted Cards */
 .flat-card {
   background: var(--bg-card);
-  border: none;
-  border-radius: 12px;
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid rgba(212, 175, 55, 0.08); /* Subtle gold border */
+  border-radius: 16px;
   padding: 20px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
 }
 
 /* Gradient text */
 .gradient-text {
-  background: linear-gradient(135deg, #EFECE9 0%, #E3C1B4 50%, #AC9C8D 100%);
+  background: linear-gradient(135deg, #FFF 0%, #D4AF37 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }
 
 .gradient-text-blue-emerald {
-  background: linear-gradient(135deg, #E3C1B4 0%, #AC9C8D 100%);
+  background: linear-gradient(135deg, #D4AF37 0%, #0F5132 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -74,13 +78,13 @@ body {
 
 /* Glow effects */
 .glow-blue {
-  box-shadow: 0 0 20px rgba(227, 193, 180, 0.2); /* Blush glow */
+  box-shadow: 0 0 20px rgba(212, 175, 55, 0.15); /* Gold glow */
 }
 .glow-emerald {
-  box-shadow: 0 0 20px rgba(85, 113, 83, 0.2); /* Green glow */
+  box-shadow: 0 0 20px rgba(15, 81, 50, 0.2); /* Emerald glow */
 }
 .glow-rose {
-  box-shadow: 0 0 20px rgba(97, 12, 39, 0.3); /* Burgundy glow */
+  box-shadow: 0 0 20px rgba(138, 21, 56, 0.2); /* Wine glow */
 }
 
 /* Flat background */
@@ -108,22 +112,28 @@ body {
 /* Stat cards */
 .stat-card {
   background: var(--bg-card);
-  border: none;
-  border-radius: 12px;
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(212, 175, 55, 0.05);
+  border-radius: 16px;
   padding: 20px;
 }
 
 /* Forecast cards */
 .forecast-card {
   background: var(--bg-card);
-  border: none;
-  border-radius: 12px;
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(212, 175, 55, 0.08);
+  border-radius: 16px;
   padding: 20px;
-  transition: transform 0.2s ease;
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
   cursor: pointer;
 }
 .forecast-card:hover {
-  transform: translateY(-2px);
+  transform: translateY(-4px) scale(1.02);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.6), 0 0 20px rgba(212, 175, 55, 0.1);
+  border-color: rgba(212, 175, 55, 0.3);
 }
 
 /* Nav styles */
@@ -424,7 +434,7 @@ select.input-field option {
 .ticker-content {
   display: inline-flex;
   padding-left: 100%;
-  animation: ticker 40s linear infinite; /* Halved speed, re-applied cleanly */
+  animation: ticker 58s linear infinite; /* Slowed down an additional 20% */
 }
 
 .ticker-wrap:hover .ticker-content {
