@@ -1,0 +1,16 @@
+pandas
+numpy
+pandas-ta
+lightgbm
+scikit-learn
+transformers
+torch
+feedparser
+requests
+beautifulsoup4
+lxml
+supabase
+python-telegram-bot
+python-dotenv
+loguru
+nselib
