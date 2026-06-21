@@ -18,12 +18,12 @@ export default function BhaluPhysics() {
     const engine = Engine.create();
     
     // Bear size
-    const radius = 40; // 80px / 2
+    const radius = 75; // 150px / 2
     
     // Create bear body
-    const bear = Bodies.circle(width / 2, 50, radius, {
+    const bear = Bodies.circle(width / 2, 80, radius, {
       restitution: 0.9, // Very bouncy
-      frictionAir: 0.01,
+      frictionAir: 0.005, // Less air resistance so it flies better
       density: 0.05,
       friction: 0.1
     });
@@ -87,8 +87,12 @@ export default function BhaluPhysics() {
     const x = e.clientX - rect.left;
     const y = e.clientY - rect.top;
     
+    // Calculate throw velocity based on distance moved
+    const dx = x - bodyRef.current.position.x;
+    const dy = y - bodyRef.current.position.y;
+    
     Matter.Body.setPosition(bodyRef.current, { x, y });
-    Matter.Body.setVelocity(bodyRef.current, { x: e.movementX, y: e.movementY });
+    Matter.Body.setVelocity(bodyRef.current, { x: dx * 0.7, y: dy * 0.7 });
   };
 
   const handlePointerUp = (e) => {
@@ -102,7 +106,7 @@ export default function BhaluPhysics() {
         ref={bearRef}
         src="/BHALU.png"
         alt="Bhalu"
-        className="absolute top-0 left-0 w-[80px] h-[80px] object-contain cursor-grab active:cursor-grabbing pointer-events-auto"
+        className="absolute top-0 left-0 w-[150px] h-[150px] object-contain cursor-grab active:cursor-grabbing pointer-events-auto"
         style={{ 
           touchAction: 'none',
           filter: 'drop-shadow(0px 10px 15px rgba(0,0,0,0.5))'
