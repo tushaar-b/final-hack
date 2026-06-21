@@ -114,7 +114,7 @@ export default function BhaluPhysics() {
   };
 
   return (
-    <div ref={containerRef} className="absolute inset-0 z-20 pointer-events-none overflow-hidden">
+    <div ref={containerRef} className="absolute top-0 bottom-0 left-0 w-screen z-20 pointer-events-none overflow-hidden">
       {mascots.map((m, i) => (
         <img
           key={m.id}
