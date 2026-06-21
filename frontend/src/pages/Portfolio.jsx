@@ -3,6 +3,7 @@ import { BookOpen, Plus, TrendingUp, TrendingDown, Trash2, CheckCircle, External
 import Disclaimer from '../components/Disclaimer';
 import { API_URL } from '../lib/supabase';
 import { useAuthStore } from '../store/authStore';
+import AISummary from '../components/AISummary';
 
 // ── P&L display helper ────────────────────────────────────────────────────────
 function PnLBadge({ entry, exit, side, qty }) {
@@ -256,6 +257,8 @@ export default function Portfolio() {
             <p className="text-xs text-slate-400 mt-1">Win Rate (N={closed.length})</p>
           </div>
         </div>
+
+        <AISummary trades={trades} />
 
         {/* Add form */}
         {showForm && (
