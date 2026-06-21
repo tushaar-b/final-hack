@@ -7,7 +7,7 @@ import {
 import { useAuthStore } from '../store/authStore';
 
 import ModeSwitch from './longterm/ModeSwitch';
-import CursorTrackerMascot from './CursorTrackerMascot';
+import BhaluPhysics from './BhaluPhysics';
 
 const getNavItems = (isLongTerm) => [
   { to: isLongTerm ? '/longterm' : '/dashboard', icon: LayoutDashboard, label: 'Dashboard' },
@@ -39,7 +39,7 @@ export default function Sidebar() {
   return (
     <div className="w-64 bg-[var(--bg-card)] flex flex-col h-screen border-r border-[var(--text-caption)]/20">
       {/* Logo */}
-      <div className="p-6 border-b border-[var(--text-caption)]/20">
+      <div className="p-6 border-b border-[var(--text-caption)]/20 z-30 bg-[var(--bg-card)] relative">
         <div className="flex items-center space-x-3">
           <div className="w-8 h-8 rounded-full bg-[var(--text-caption)]/10 border border-[var(--text-caption)]/30 flex items-center justify-center">
             <TrendingUp className="w-4 h-4 text-[var(--color-positive)]" />
@@ -50,17 +50,14 @@ export default function Sidebar() {
         </div>
       </div>
 
-      {/* Mascot Centerpiece */}
-      <div className="py-6 flex justify-center border-b border-[var(--text-caption)]/10 relative overflow-hidden">
-        {/* Subtle glow behind mascot */}
-        <div className="absolute inset-0 bg-gradient-to-b from-[var(--color-highlight)]/5 to-transparent blur-xl pointer-events-none" />
-        <CursorTrackerMascot className="w-36 h-36" />
-      </div>
+      {/* Physics + Nav Container */}
+      <div className="flex-1 relative min-h-0 flex flex-col">
+        <BhaluPhysics />
 
-      {/* Nav */}
-      <nav className="flex-1 py-4 space-y-2 overflow-y-auto">
-        <ModeSwitch />
-        <p className="font-label px-3 mb-4 mt-2">Main</p>
+        {/* Nav */}
+        <nav className="flex-1 py-4 space-y-2 overflow-y-auto relative z-10">
+          <ModeSwitch />
+          <p className="font-label px-3 mb-4 mt-2">Main</p>
         {activeNavItems.map(({ to, icon: Icon, label }) => (
           <NavLink
             key={to}
@@ -101,6 +98,7 @@ export default function Sidebar() {
           </>
         )}
       </nav>
+      </div>
 
       {/* User */}
       <div className="p-4 border-t border-[var(--text-caption)]/20">
